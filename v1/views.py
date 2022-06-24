@@ -1,12 +1,14 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, permissions
 import random
 import json
 import pandas as pd
 
 
 class FactView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
     def get(self, request):
         try:
             with open("./facts.json", "rb") as f:
@@ -30,6 +32,8 @@ class FactView(APIView):
 
 
 class FactIDView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
     def get(self, request, id):
         try:
             with open("./facts.json", "rb") as f:

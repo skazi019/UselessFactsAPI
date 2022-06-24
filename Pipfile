@@ -8,6 +8,8 @@ django = "*"
 django-rest-framework = "*"
 python-dotenv = "*"
 pandas = "*"
+dj-rest-auth = {extras = ["with_social"], version = "*"}
+drf-yasg = "*"
 
 [dev-packages]
 black = "*"
