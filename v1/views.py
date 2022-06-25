@@ -53,6 +53,7 @@ class FactView(APIView):
     @swagger_auto_schema(
         manual_parameters=manual_parameters,
         operation_summary="Returns a useless fact at random",
+        operation_description="After successful authentication by passing the Token, return a useless fact with it's id",
         responses=response_schema_dict,
     )
     def post(self, request, *args, **kwargs):
@@ -121,6 +122,10 @@ class FactIDView(APIView):
     @swagger_auto_schema(
         manual_parameters=manual_parameters,
         operation_summary="Returns a useless fact for that paticular ID",
+        operation_description="""
+        After successful authentication by passing the Token, return a useless fact with it's id
+        Note - click the "Example Value" button for each response to check how the sample value would look like, by default it would show a loader.
+        """,
         responses=response_schema_dict,
     )
     def post(self, request, id):
