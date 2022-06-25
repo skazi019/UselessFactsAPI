@@ -53,9 +53,16 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Basic": {"type": "basic"},
+        "Token": {"type": "apiKey", "name": "Authorization", "in": "header"},
+    }
+}
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",  # <-- And here
+        "rest_framework.authentication.TokenAuthentication",
     ],
 }
 

@@ -1,15 +1,61 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
+from rest_framework.authentication import TokenAuthentication
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 import random
 import json
 import pandas as pd
 
 
 class FactView(APIView):
+    authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
-    def get(self, request):
+    manual_parameters = [
+        openapi.Parameter(
+            "Authorizarion",
+            in_=openapi.IN_HEADER,
+            type=openapi.TYPE_STRING,
+            description="obtained after successful login or regisration, click on the lock icon(right) in the header above and pass value for 'Token' as 'Token <token received after login/registration>'",
+        ),
+    ]
+
+    response_schema_dict = {
+        "200": openapi.Response(
+            description="Returns status and the fact along with the fact id",
+            examples={
+                "application/json": {
+                    "status": "success",
+                    "data": {"id": "<fact_id>", "fact": "some useless fact"},
+                }
+            },
+        ),
+        "401": openapi.Response(
+            description="Invalid Authorization",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token/Authentication credentials not provided",
+                }
+            },
+        ),
+        "500": openapi.Response(
+            description="Some error in backend",
+            examples={
+                "application/json": {
+                    "status": "error",
+                }
+            },
+        ),
+    }
+
+    @swagger_auto_schema(
+        manual_parameters=manual_parameters,
+        operation_summary="Returns a useless fact at random",
+        responses=response_schema_dict,
+    )
+    def post(self, request, *args, **kwargs):
         try:
             with open("./facts.json", "rb") as f:
                 all_facts = json.load(f)
@@ -32,9 +78,52 @@ class FactView(APIView):
 
 
 class FactIDView(APIView):
+    authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
-    def get(self, request, id):
+    manual_parameters = [
+        openapi.Parameter(
+            "Authorizarion",
+            in_=openapi.IN_HEADER,
+            type=openapi.TYPE_STRING,
+            description="obtained after successful login or regisration, click on the lock icon(right) in the header above and pass value for 'Token' as 'Token <token received after login/registration>'",
+        ),
+    ]
+
+    response_schema_dict = {
+        "200": openapi.Response(
+            description="Returns status and the fact along with the fact id",
+            examples={
+                "application/json": {
+                    "status": "success",
+                    "data": {"id": "<fact_id>", "fact": "some useless fact"},
+                }
+            },
+        ),
+        "401": openapi.Response(
+            description="Invalid Authorization",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token/Authentication credentials not provided",
+                }
+            },
+        ),
+        "500": openapi.Response(
+            description="Some error in backend",
+            examples={
+                "application/json": {
+                    "status": "error",
+                }
+            },
+        ),
+    }
+
+    @swagger_auto_schema(
+        manual_parameters=manual_parameters,
+        operation_summary="Returns a useless fact for that paticular ID",
+        responses=response_schema_dict,
+    )
+    def post(self, request, id):
         try:
             with open("./facts.json", "rb") as f:
                 all_facts = json.load(f)

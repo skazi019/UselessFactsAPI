@@ -9,6 +9,7 @@ django-rest-framework = "*"
 python-dotenv = "*"
 pandas = "*"
 dj-rest-auth = {extras = ["with_social"], version = "*"}
+django-rest-swagger = "*"
 drf-yasg = "*"
 
 [dev-packages]
