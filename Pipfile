@@ -11,6 +11,8 @@ pandas = "*"
 dj-rest-auth = {extras = ["with_social"], version = "*"}
 django-rest-swagger = "*"
 drf-yasg = "*"
+whitenoise = "*"
+gunicorn = "*"
 
 [dev-packages]
 black = "*"

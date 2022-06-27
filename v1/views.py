@@ -1,3 +1,4 @@
+from django.views.generic import TemplateView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
@@ -7,6 +8,10 @@ from drf_yasg import openapi
 import random
 import json
 import pandas as pd
+
+
+class HomepageView(TemplateView):
+    template_name: str = "homepage.html"
 
 
 class FactView(APIView):
@@ -52,7 +57,7 @@ class FactView(APIView):
 
     @swagger_auto_schema(
         manual_parameters=manual_parameters,
-        operation_summary="Returns a useless fact at random",
+        operation_summary="Returns a random useless fact",
         operation_description="After successful authentication by passing the Token, return a useless fact with it's id",
         responses=response_schema_dict,
     )
@@ -121,7 +126,7 @@ class FactIDView(APIView):
 
     @swagger_auto_schema(
         manual_parameters=manual_parameters,
-        operation_summary="Returns a useless fact for that paticular ID",
+        operation_summary="Returns a useless fact for the ID passed while calling the API",
         operation_description="""
         After successful authentication by passing the Token, return a useless fact with it's id
         Note - click the "Example Value" button for each response to check how the sample value would look like, by default it would show a loader.
