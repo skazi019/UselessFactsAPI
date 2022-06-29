@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView
+from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
@@ -10,13 +10,23 @@ import json
 import pandas as pd
 
 
-class HomepageView(TemplateView):
-    template_name: str = "homepage.html"
+def homepage(request):
+    with open("./facts.json", "rb") as f:
+        all_facts = json.load(f)
+    all_facts = all_facts["facts"]
+    return render(
+        request=request,
+        template_name="homepage.html",
+        context={
+            "total_facts": len(all_facts),
+        },
+    )
 
 
 class FactView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+    throttle_scope = "limited"
 
     manual_parameters = [
         openapi.Parameter(
@@ -86,6 +96,7 @@ class FactView(APIView):
 class FactIDView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+    throttle_scope = "limited"
 
     manual_parameters = [
         openapi.Parameter(

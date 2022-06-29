@@ -13,6 +13,7 @@ django-rest-swagger = "*"
 drf-yasg = "*"
 whitenoise = "*"
 gunicorn = "*"
+django-livereload-server = "*"
 
 [dev-packages]
 black = "*"

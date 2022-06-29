@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}{% endblock title %}
 
 {% block content %}
-<h1 class="text-gray-500">Hello</h1>
+{% include 'hero.html' %}
+{% include 'body.html' %}
 {% endblock content %}

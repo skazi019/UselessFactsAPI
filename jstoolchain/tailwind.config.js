@@ -4,9 +4,11 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
-  purge: {
-    enabled: true,
-    content: ['../templates/*.html'],
-  },
+  plugins: [
+    // require("daisyui"),
+  ],
+  // purge: {
+  //   enabled: true,
+  //   content: ['../templates/*.html'],
+  // },
 }
