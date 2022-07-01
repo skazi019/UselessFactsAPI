@@ -15,3 +15,6 @@ using pipenv
 ```shell
 pipenv install
 ```
+### Usage
+
+I've written [a simple guide on how to use these APIs](https://dev.to/skazi019/a-simple-guide-to-using-the-useless-facts-api-gm3)
